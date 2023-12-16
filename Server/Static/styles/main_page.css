@@ -1,0 +1,119 @@
+img {
+  width: 150px; /* Nowa szerokość */
+  height: auto; /* Auto dopasowanie wysokości proporcjonalnie */
+}
+.main_container{
+  background-image: url('../static/img/leaves.png'); /* Ścieżka do pliku obrazu */
+  background-size: cover; /* Dopasuj obraz do wielkości ekranu */
+  background-position: center; /* Ustaw pozycję obrazu na środku */
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFCF2;
+    padding: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+.flat_logo{
+  margin-left: 10px;
+  margin-top: 20px;
+  font-size: 35px;
+}
+.owner_header{
+    margin-left: 5px;
+    margin-bottom: 5px;
+    font-size: 2em;
+    padding: 10px;
+    color: #4D392E;
+}
+.column_container {
+    display: flex; /* Ustawienie kontenera na flexbox */
+}
+.tasks_container {
+  display: flex; /* Ustawienie kontenera na flexbox */
+  flex-direction: column;
+}
+
+.column {
+    flex: 1; /* Elastyczność kolumny, aby zajmować dostępną przestrzeń */
+    margin: 10px; /* Dodatkowe marginesy dla estetyki (opcjonalne) */
+}
+
+.footer {
+    background-color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 1em;
+    color: #333;
+  }
+
+  .list_element {
+        width: fit-content;
+        display: inline-block;
+        background: rgb(200, 211, 155);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        margin: 10px 10px;
+        border-radius: 30px;
+        padding: 10px;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+  border: none;
+  padding: 0.3rem 1rem;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.05rem;
+  font-weight: 700;
+  font-size: 8px;
+  border-radius: 500px;
+  overflow: hidden;
+  background: #BFB2A1;
+  color: ghostwhite;
+ }
+ 
+ button span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.4s;
+ }
+ 
+ button:hover span {
+  color: black;
+ }
+ 
+ button::before,
+ button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+ }
+ 
+ button::before {
+  content: "";
+  background: #000;
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+ }
+ 
+ button:hover::before {
+  transform: translate3d(100%, 0, 0);
+ }
+ 
