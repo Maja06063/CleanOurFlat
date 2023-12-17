@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CleanOurFlat| MajaSkibinska</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/main_page.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/formularz.css') }}">
+</head>
+<body>
+  <div class="main-container">
+    <div class="column_container">
+    <center class="center-container">
+      <h2 class="no-bold-header">Dodawanie zadania</h2>
+      <label for="task_name">Nazwa zadania:</label>
+      <input type="text" id="task_name" maxlength="20" placeholder="Nazwa zadania" value="{{ task_name }}"><br><br>
+
+      <label class="specie" for="species">Dla kogo:</label>
+      <div class="box">
+      <select class = "box1"id="species_owner" name="species">
+        <option value = 1>Później zdecyduję</option>
+        <option value = 2>Kasia</option>
+        <option value = 3>Maja</option>
+        <option value = 4>Michał</option>
+      </select>
+      </div><br>
+
+      <label class="specie" for="species">Priorytet:</label>
+      <div class="box">
+        <select class = "box1"id="species_priority" name="species">
+            <option value = 1>Zwykły</option>
+            <option value = 2>Duży</option>
+            <option value = 3>Bardzo duży</option>
+        </select>
+        </div><br><br>
+
+      <button class="login-button" type="button" onclick=" save_task()"><span>Potwierdź</span></button>
+    </center>
+    </div>
+    <div class="return-button-container">
+      <button class="return-button" onclick="go_to_main_page()"><span>Cofnij</span></button>
+    </div>
+  </div>
+  <div class="footer">
+      <p>© 2023  CleanOurFlat.</p>
+  </div>
+  <script src = "{{ url_for('static', filename='scripts/formularz.js') }}"></script>
+</body>
+</html>

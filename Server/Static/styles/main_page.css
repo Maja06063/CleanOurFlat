@@ -1,5 +1,9 @@
+.logo{
+  display: flex;
+  justify-content: center;
+}
 img {
-  width: 150px; /* Nowa szerokość */
+  width: 350px; /* Nowa szerokość */
   height: auto; /* Auto dopasowanie wysokości proporcjonalnie */
 }
 .main_container{
@@ -33,11 +37,13 @@ img {
 .tasks_container {
   display: flex; /* Ustawienie kontenera na flexbox */
   flex-direction: column;
+  justify-content: center;
 }
 
 .column {
     flex: 1; /* Elastyczność kolumny, aby zajmować dostępną przestrzeń */
     margin: 10px; /* Dodatkowe marginesy dla estetyki (opcjonalne) */
+    background-color: #BFB2A1;
 }
 
 .footer {

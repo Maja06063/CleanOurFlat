@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleanOurFlat | MajaSkibinska</title>
-    <link rel="stylesheet" href="../static/styles/main_page.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main_page.css') }}">
     <!-- Dodaj link do zewnętrznej czcionki (jeśli dostępna online) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="Roboto">
 </head>
 <body>
     <div class="main_container">
         <div class="logo">
-            <img src="../static/img/Clean our2.png">
+            <img src="{{ url_for('static', filename='img/clean our flat.png') }}">
         </div>
         <div class="column_container">
-            <div class="column" style="background-color: #BFB2A1;">
+            <div class="column">
 
                 <div  class="tasks_container" id="container_task_without_owner" >
                     <h1 class="owner_header">Zadania bez właściciela</h1>
-                    <button class="add_task"> <span>Dodaj zadanie</span>
+                    <button class="add_task" onclick="add_new_task()"> <span>Dodaj zadanie</span>
                     </button>
                     
                 </div>
@@ -50,6 +50,6 @@
     <div class="footer">
         <p>© 2023 CleanOurFlat.</p>
     </div>
-<script src = "../Static/scripts/create_lists.js"></script>
+<script src = "{{ url_for('static', filename='scripts/create_lists.js') }}"></script>
 </body>
 </html>
