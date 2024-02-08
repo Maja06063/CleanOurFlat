@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request,make_response
 import connect_database
 
 server_app = Flask("CleanOurFlat")
@@ -10,6 +10,30 @@ def main_page_endpoint():
 @server_app.route("/form")
 def add_new_task():
     return render_template("formularz.html")
+
+@server_app.route("/save_task", methods = ["POST","PUT"])
+def add_owner_to_task():
+    post_data_dict = request.get_json()
+    print(post_data_dict)
+
+    if request.method == "POST":
+        print(post_data_dict["owner"])
+        if int(post_data_dict["owner"]) == 1:
+            print("1")
+            status = 1
+        else:
+            print("2")
+            status = 2
+        if connect_database.edit_database(
+            f"""INSERT INTO Tasks (names, status, owner, priority) 
+            VALUES ('{post_data_dict["names"]}',{status},{post_data_dict["owner"]},{post_data_dict["priority"]});"""):
+            return make_response("", 201)
+
+    #elif request.method == "PUT":
+        #if my_plants_gen.plantEdited(login_cookie, post_data_dict):
+            #return make_response("", 201)
+
+    return make_response("", 400)
 
 @server_app.route("/get_tasks")
 def get_tasks_endpoint():

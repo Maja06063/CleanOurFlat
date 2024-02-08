@@ -20,7 +20,17 @@ def get_from_database():
     data_from_database = my_cursor.fetchall()
     return data_from_database
 
-cursor = connection.cursor()
+def edit_database(sql_query):
+    try:
+        my_cursor.execute(sql_query)
+        #"INSERT INTO Tasks (names, status, owner, priority) VALUES ('ścieranie kurzu z szafki',1,1,1);"
+        connection.commit()
+        return True
+    except:
+        print("Problem with saving database")
+        return False
+
+
 """
 try:
     cursor.execute("INSERT INTO Tasks (names, status, owner, priority) VALUES ('ścieranie kurzu z szafki',1,1,1);")

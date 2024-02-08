@@ -81,6 +81,7 @@ img {
 
 .add_task{
   width: 25%;
+  margin-left: 20px;
 }
 button {
   outline: none;
