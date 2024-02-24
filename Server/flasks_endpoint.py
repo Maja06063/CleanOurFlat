@@ -29,11 +29,28 @@ def add_owner_to_task():
             VALUES ('{post_data_dict["names"]}',{status},{post_data_dict["owner"]},{post_data_dict["priority"]});"""):
             return make_response("", 201)
 
-    #elif request.method == "PUT":
-        #if my_plants_gen.plantEdited(login_cookie, post_data_dict):
-            #return make_response("", 201)
+    elif request.method == "PUT":
+        id = post_data_dict["id"]
+        owner = post_data_dict["owner"]
+        edit_query = "UPDATE Tasks SET owner = " + str(owner)+",status = 2 WHERE tasks_id = " + str(id) + ";"
+        if connect_database.edit_database(edit_query):
+            return make_response("", 201)
 
     return make_response("", 400)
+
+@server_app.route("/delete_task", methods = ["DELETE"])
+def delete_tasks():
+    post_data_dict = request.get_json()
+    id = post_data_dict["id"]
+    delete_query = "DELETE FROM Tasks WHERE tasks_id = " + str(id) + ";"
+    if connect_database.edit_database(delete_query):
+        #usuwanie z bazy danych
+
+        return make_response("", 204)
+        #gdy się nie uda usunąć
+    
+    return make_response("", 400)
+
 
 @server_app.route("/get_tasks")
 def get_tasks_endpoint():

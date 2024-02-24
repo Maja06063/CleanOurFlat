@@ -18,12 +18,12 @@ for(let i=0; i<tasks_list.length ;i++){
     if (tasks_list[i].status == 1){
         let without_owner = document.querySelector("#container_task_without_owner")
         without_owner.innerHTML += `
-        <div class="list_element priority${tasks_list[i].priority}"
+        <div class="list_element priority${tasks_list[i].priority}" id = "element${i}"
         >${tasks_list[i].names}
         ${select_html}
-          <button> <span>Potwierdź</span>
+          <button onclick = "add_user_to_task(${tasks_list[i].tasks_id}, 'element${i}' )"> <span>Potwierdź</span>
           </button>
-          <button> <span>Usuń</span>
+          <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Usuń</span>
           </button>
     </div>
         `
@@ -38,7 +38,7 @@ for(let i=0; i<tasks_list.length ;i++){
              >${tasks_list[i].names}
                 <button> <span>Zrobione</span>
                 </button>
-                <button> <span>Usuń</span>
+                <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Usuń</span>
                 </button>
             </div>
             `
@@ -51,7 +51,7 @@ for(let i=0; i<tasks_list.length ;i++){
              >${tasks_list[i].names}
                 <button> <span>Zrobione</span>
                 </button>
-                <button> <span>Usuń</span>
+                <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Usuń</span>
                 </button>
             </div>
             `
@@ -64,7 +64,7 @@ for(let i=0; i<tasks_list.length ;i++){
              >${tasks_list[i].names}
                 <button> <span>Zrobione</span>
                 </button>
-                <button> <span>Usuń</span>
+                <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Usuń</span>
                 </button>
             </div>
             `
@@ -75,7 +75,7 @@ for(let i=0; i<tasks_list.length ;i++){
         task_done.innerHTML += `
         <div class="list_element priority${tasks_list[i].priority}"
          >${tasks_list[i].names}
-            <button> <span>Akceptuj</span>
+         <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Akceptuj</span>
             </button>
             <button> <span>Odrzuć</span>
             </button>
@@ -98,4 +98,49 @@ let select_html = `
 `
 function add_new_task(){
     window.location.href = "/form";
+}
+
+function delete_task(id){
+    fetch('/delete_task', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: id,
+        }),
+      })
+        .then(response => {
+          if (response.status == 204){
+            alert("Usuwanie udane. Kod 204.");
+            window.location.href = "/";
+          }
+          else{
+            alert(`Usuwanie nie powiodło się. Kod błędu ${response.status}`);
+          }
+        });
+}
+
+function add_user_to_task(task_id, list_element_id ){
+    const list_element = document.querySelector("#"+list_element_id);
+    const owner = list_element.children[0].value; 
+    fetch('/save_task', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: task_id, owner: owner
+        }),
+      })
+        .then(response => {
+          if (response.status == 201){
+            alert(`Przypisanie użytkownika udane. Kod ${response.status}.`);
+            window.location.href = "/";
+          }
+          else{
+            alert(`Przypisanie użytkownika nie powiodło się. Kod błędu ${response.status}`);
+          }
+        });
+
 }
