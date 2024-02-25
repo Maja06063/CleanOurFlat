@@ -57,10 +57,23 @@ def done_tasks():
     id = post_data_dict["id"]
     done_query = "UPDATE Tasks SET status = 3 WHERE tasks_id = " + str(id) + ";"
     if connect_database.edit_database(done_query):
-        #usuwanie z bazy danych
+        #edycja bazy danych
 
         return make_response("", 201)
-        #gdy się nie uda usunąć
+        #gdy się nie uda edytować
+    
+    return make_response("", 400)
+
+@server_app.route("/reject_task", methods = ["PUT"])
+def reject_tasks():
+    post_data_dict = request.get_json()
+    id = post_data_dict["id"]
+    done_query = "UPDATE Tasks SET status = 2 WHERE tasks_id = " + str(id) + ";"
+    if connect_database.edit_database(done_query):
+        #edycja bazy danych
+
+        return make_response("", 201)
+        #gdy się nie uda edytować
     
     return make_response("", 400)
 

@@ -77,7 +77,7 @@ for(let i=0; i<tasks_list.length ;i++){
          >${tasks_list[i].names}
          <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Akceptuj</span>
             </button>
-            <button> <span>Odrzuć</span>
+            <button onclick = "reject_task(${tasks_list[i].tasks_id})"> <span>Odrzuć</span>
             </button>
         </div>
         `
@@ -162,6 +162,28 @@ function done_task(task_id){
         }
         else{
           alert(`Uznawanie zadania jako wykonane nie powiodło się. Kod błędu ${response.status}`);
+        }
+      });
+
+}
+
+function reject_task(task_id){
+  fetch('/reject_task', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: task_id
+      }),
+    })
+      .then(response => {
+        if (response.status == 201){
+          alert(`Zadanie odrzucone. Wraca do wykonawcy. Kod ${response.status}.`);
+          window.location.href = "/";
+        }
+        else{
+          alert(`Uznawanie zadania jako odrzucone nie powiodło się. Kod błędu ${response.status}`);
         }
       });
 
