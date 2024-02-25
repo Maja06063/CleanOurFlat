@@ -36,7 +36,7 @@ for(let i=0; i<tasks_list.length ;i++){
             kasia_owner.innerHTML += `
             <div class="list_element priority${tasks_list[i].priority}"
              >${tasks_list[i].names}
-                <button> <span>Zrobione</span>
+             <button onclick = "done_task(${tasks_list[i].tasks_id})"> <span>Zrobione</span>
                 </button>
                 <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Usuń</span>
                 </button>
@@ -49,7 +49,7 @@ for(let i=0; i<tasks_list.length ;i++){
             maja_owner.innerHTML += `
             <div class="list_element priority${tasks_list[i].priority}"
              >${tasks_list[i].names}
-                <button> <span>Zrobione</span>
+             <button onclick = "done_task(${tasks_list[i].tasks_id})"> <span>Zrobione</span>
                 </button>
                 <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Usuń</span>
                 </button>
@@ -62,7 +62,7 @@ for(let i=0; i<tasks_list.length ;i++){
             michal_owner.innerHTML += `
             <div class="list_element priority${tasks_list[i].priority}"
              >${tasks_list[i].names}
-                <button> <span>Zrobione</span>
+                <button onclick = "done_task(${tasks_list[i].tasks_id})"> <span>Zrobione</span>
                 </button>
                 <button onclick = "delete_task(${tasks_list[i].tasks_id})"> <span>Usuń</span>
                 </button>
@@ -142,5 +142,27 @@ function add_user_to_task(task_id, list_element_id ){
             alert(`Przypisanie użytkownika nie powiodło się. Kod błędu ${response.status}`);
           }
         });
+
+}
+
+function done_task(task_id){
+  fetch('/done_task', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: task_id
+      }),
+    })
+      .then(response => {
+        if (response.status == 201){
+          alert(`Zadanie uznane jako wykonane. Czeka na potwierdzenie. Kod ${response.status}.`);
+          window.location.href = "/";
+        }
+        else{
+          alert(`Uznawanie zadania jako wykonane nie powiodło się. Kod błędu ${response.status}`);
+        }
+      });
 
 }

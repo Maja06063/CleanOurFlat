@@ -51,6 +51,19 @@ def delete_tasks():
     
     return make_response("", 400)
 
+@server_app.route("/done_task", methods = ["PUT"])
+def done_tasks():
+    post_data_dict = request.get_json()
+    id = post_data_dict["id"]
+    done_query = "UPDATE Tasks SET status = 3 WHERE tasks_id = " + str(id) + ";"
+    if connect_database.edit_database(done_query):
+        #usuwanie z bazy danych
+
+        return make_response("", 201)
+        #gdy się nie uda usunąć
+    
+    return make_response("", 400)
+
 
 @server_app.route("/get_tasks")
 def get_tasks_endpoint():
